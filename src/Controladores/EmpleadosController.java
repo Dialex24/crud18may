@@ -4,6 +4,8 @@ import Modelos.*;
 import Vistas.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author umg
  */
-public class EmpleadosController implements ActionListener{
+public class EmpleadosController implements ActionListener, MouseListener{
  frmEmpleados VistaEmpleados;
  frmPrincipal VistaPrincipal;
  EmpleadosModel ModeloEmpleado;
@@ -67,6 +69,9 @@ public class EmpleadosController implements ActionListener{
             //PASAR EL MODELO CREADO A LA TABLA DE LA VISTA EMPLEADOS        
                     this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
         
+          //    poner a la escucha tabla empleados
+          this.VistaEmpleados.jtbEmpleados.addMouseListener(this);
+          
         /*LEVANTAR LA VISTA EMPLEADOR*/
       this.VistaEmpleados.setLocationRelativeTo(null);
       this.VistaEmpleados.setVisible(true);
@@ -76,8 +81,53 @@ public class EmpleadosController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.VistaEmpleados.btn_Editar)
         {
-            this.ModeloEmpleado.Actualizar(1, "Raton", "Rata", "32145");
+            this.ModeloEmpleado.Actualizar(Integer.parseInt(this.VistaEmpleados.txtCodigo.getText()), 
+                    this.VistaEmpleados.txtApellidos.getText(), this.VistaEmpleados.txtNombre.getText(),
+                    this.VistaEmpleados.txtTelefono.getText());
+            this.ModeloEmpleado.ListarDatos();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent arg0) {
+        int fila;
+        if(arg0.getSource()==this.VistaEmpleados.jtbEmpleados)
+        {
+            //JOptionPane.showMessageDialog(null, "clicando la tabla");
+            fila = this.VistaEmpleados.jtbEmpleados.getSelectedRow();
+            //codigo
+            this.VistaEmpleados.txtCodigo.setText(
+            this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 0).toString());
+            //apellidos
+            this.VistaEmpleados.txtApellidos.setText(
+            this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 1).toString());
+            //nombre
+            this.VistaEmpleados.txtNombre.setText(
+            this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 2).toString());
+            //telefono
+            this.VistaEmpleados.txtTelefono.setText(
+            this.VistaEmpleados.jtbEmpleados.getValueAt(fila, 3).toString());
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent arg0) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent arg0) {
+       
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent arg0) {
+       
+    }
+
+    @Override
+    public void mouseExited(MouseEvent arg0) {
+        
     }
 
     
