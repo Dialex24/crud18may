@@ -29,14 +29,14 @@ public ResultSet ListarDatos()
 }
 
 
-public void Actualizar(int codigo, String Apellidos, String Nombre, String telefono)
+public void Actualizar(int codigo, String apellido, String nombre, String telefono)
 {
         try
         {
           Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        sentencia.executeQuery("Update empleados set apellidos ="+"'"+Apellidos+"',nombre="+"'"+Nombre+"',telefono="+"'"+telefono+"' where idempleado="+"'"+codigo+"'");
+        sentencia.executeQuery("Update empleados set apellido ="+"'"+apellido+"',nombre="+"'"+nombre+"',telefono="+"'"+telefono+"' where codigo="+"'"+codigo+"'");
         }
         catch(SQLException ex)
         {
@@ -45,14 +45,14 @@ public void Actualizar(int codigo, String Apellidos, String Nombre, String telef
           
 }
 
-public void Guardar(int codigo, String Apellido, String Nombre, String telefono)
+public void Guardar(int codigo, String apellido, String nombre, String telefono)
 {
      try
         {
           Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        sentencia.executeQuery("Insert into empleados values ("+"'"+codigo+"',"+"'"+Apellido+"',"+"'"+Nombre+"'"+"'"+telefono+"')");
+        sentencia.executeQuery("Insert into empleados values ("+"'"+codigo+"',"+"'"+apellido+"',"+"'"+nombre+"'"+"'"+telefono+"')");
         }
         catch(SQLException ex)
         {

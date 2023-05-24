@@ -44,7 +44,7 @@ public class EmpleadosController implements ActionListener, MouseListener{
                 this.VistaEmpleados.jtbEmpleados.setModel(TablaModelo);
       
             //prepara el modelo de la tabla
-                    TablaModelo.addColumn("ID");
+                    TablaModelo.addColumn("CODIGO");
                     TablaModelo.addColumn("APELLIDOS");
                     TablaModelo.addColumn("NOMBRE");
                     TablaModelo.addColumn("TELEFONO");
@@ -58,7 +58,7 @@ public class EmpleadosController implements ActionListener, MouseListener{
                        
                     while(rstEmpleados.next())
                     {
-                     TablaModelo.addRow(new Object[]{rstEmpleados.getInt("idEmpleado"),rstEmpleados.getString("Apellidos"),rstEmpleados.getString("Nombre"),rstEmpleados.getString("Telefono")});  
+                     TablaModelo.addRow(new Object[]{rstEmpleados.getInt("codigo"),rstEmpleados.getString("apellido"),rstEmpleados.getString("nombre"),rstEmpleados.getString("telefono")});  
                     }  
                     }
                     catch(SQLException e)
