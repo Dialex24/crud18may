@@ -36,7 +36,7 @@ public DefaultTableModel ListarDatos()
        
        while(result.next())
        {
-           TablaModelo.addRow(new Object[](result.getInt("codigo"), result.getString("apellido"), result.getString("nombre"), result.getString("telefono")));
+           TablaModelo.addRow(new Object[]{result.getInt("codigo"), result.getString("apellido"), result.getString("nombre"), result.getString("telefono")});
        }
        return TablaModelo;
     }
@@ -63,6 +63,7 @@ public void Actualizar(int codigo, String apellido, String nombre, String telefo
         {
           JOptionPane.showMessageDialog(null, "No se pudo Actualizar..."+ex.getMessage());
         }
+        
           
 }
 
@@ -73,11 +74,28 @@ public void Guardar(int codigo, String apellido, String nombre, String telefono)
           Conexion nuevaConexion = new Conexion();
         MyConexion = nuevaConexion.Conectar();
         Statement sentencia = MyConexion.createStatement();
-        sentencia.executeQuery("Insert into empleados values ("+"'"+codigo+"',"+"'"+apellido+"',"+"'"+nombre+"'"+"'"+telefono+"')");
+        sentencia.executeQuery("Insert into empleados values ("+"'"+codigo+"',"+"'"+apellido+"',"+"'"+nombre+"',"+"'"+telefono+"')");
         }
         catch(SQLException ex)
         {
           JOptionPane.showMessageDialog(null, "No se pudo Guardar..."+ex.getMessage());
         }
-}
+         
+     
+    }
+
+    public void Eliminar(int codEliminar) throws SQLException
+     {
+         try
+        {
+          Conexion nuevaConexion = new Conexion();
+        MyConexion = nuevaConexion.Conectar();
+        Statement sentencia = MyConexion.createStatement();
+        sentencia.executeQuery("Delete from empleados where codigo="+"'"+codEliminar+"'");
+        }
+        catch(SQLException ex)
+        {
+          JOptionPane.showMessageDialog(null, "No se pudo Eliminar..."+ex.getMessage());
+        }
+     }
 }

@@ -52,8 +52,6 @@ public class frmEmpleados extends javax.swing.JDialog {
 
         jLabel4.setText("Telefono:");
 
-        txtCodigo.setEditable(false);
-
         btn_Agregar.setText("Agregar");
 
         btn_Editar.setText("Editar");
